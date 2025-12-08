@@ -1,27 +1,32 @@
-// este componente recibe
-// tasks  un arreglo con todas las tareas no completadas
-// onComplete  funcion que marca una tarea como completada
-// onDelet funcion que elimina una tarea
+// Importamos el componente TaskItem para poder usarlo dentro de la lista
+import TaskItem from "./TaskItem";
+
+// Componente TaskList
+// Recibe 3 props:
+//   tasks: lista de tareas pendientes (no completadas)
+//  -onComplete: funcion que marca una tarea como completada
+//  -onDelete: funcion para eliminar una tarea
 function TaskList({ tasks, onComplete, onDelete }) {
   return (
+    // Contenedor principal de la lista
     <div className="task-list">
 
-      {/* si no hay tareas en el arreglo se muestra un mensaje */}
+      {/* Si no hay tareas en el arreglo, se muestra un mensaje */}
       {tasks.length === 0 && <p>No hay tareas</p>}
 
-      {/* Se recorre la lista usando .map para renderizar un TaskItem por cada tarea.
-          cada TaskItem recibe los datos de la tarea y las funciones del padre. 
-      */}
+      {/* Recorremos todas las tareas usando .map.
+          Por cada tarea generamos un componente TaskItem. */}
       {tasks.map((task) => (
         <TaskItem
-          key={task.id}            // react usa key para optimizar listas
-          task={task}              // se pasa la info completa de la tarea
-          onComplete={onComplete}  // funcin que completa la tarea
-          onDelete={onDelete}      // funcion que elimina la tarea
+          key={task.id}          // clave unica para ayudar a React a optimizar la lista
+          task={task}            // se pasa toda la información de la tarea
+          onComplete={onComplete} // funcion para completar la tarea
+          onDelete={onDelete}     // funcin para eliminar la tarea
         />
       ))}
     </div>
   );
 }
 
+// Exportamos el componente para poder usarlo en otros archivos
 export default TaskList;
